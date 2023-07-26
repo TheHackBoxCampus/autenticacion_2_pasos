@@ -11,13 +11,36 @@ Un ejemplo de la vida cotidiana de este tipo de autenticación es la retirada de
 
 Passport es un middleware de autenticación para Node.js. Extremadamente flexible y modular, Passport se puede colocar discretamente en cualquier aplicación web basada en Express. Un conjunto integral de estrategias admite la autenticación mediante un nombre de usuario y contraseña, Facebook, Twitter y más.
 
-### Ejemplo con discord 
-### Instalar las dependencias 
-```bash
-npm i -E passport-discord
+## Autenticación de ``DISCORD`` <img src="public/assets/discord.svg" >
+El proyecto se realizo con el objetivo de poder realizar autenticación a los usuarios que tuvieran una cuenta de discord.
+
+## Inicialización del proyecto 
+
+Clonamos el repositorio e instalamos las dependencias del archivo ``package.json``
+
+```bash 
+git clone 'https://github.com/TheHackBoxCampus/autenticacion_2_pasos.git'
+
+cd autenticacion_2_pasos
+
+npm i || npm install 
 ```
 
-### Configuración de la libreria
+### Dependencias
+- express
+- express-session
+- passport 
+- passport-discord
+- passport-oauth
+- nodemon
+
+## Escucha del Servidor
+```bash
+npm run dev // lanzas el servidor de express
+```
+
+### Configuración de la libreria ``passport-discord``
+
 ```js
 var DiscordStrategy = require('passport-discord').Strategy;
 
@@ -35,7 +58,21 @@ function(accessToken, refreshToken, profile, cb) {
     });
 }));
 ```
-### Uso en los endpoints
+
+### Verificar el token de Autenticación
+```js
+const auth = (req, res, next) => {
+    if(req.isAuthenticated()) {
+        return next();         
+    }else {
+        res.send({data: undefined})
+    }
+}
+
+export default auth; 
+```
+
+## Tecnologia para el Routing
 En este caso para el manejo del router, se esta utilizando la libreria express
 ```js
 import {Router} from "express"
@@ -44,9 +81,26 @@ const router = Router();
 
 export default router; 
 ```
-### Uso de la autenticacion de 
-``DISCORD``
 
-    
-<img src="./resources/icons8-logotipo-de-la-discordia.svg">
+## Rutas
+Se realizaron 3 rutas:
+
+```JS
+router.get("/login", passport.authenticate("discord", {failureRedirect: "/home"}), (req, res) => {})
+
+router.get("/perfil", authVerify, (req, res) => {})
+
+// files statics
+app.use("/home", express.static("public"));
+```
+
+``/login``: Esta ruta autentica los usuarios mediante discord, donde deberas colocar una cuenta de discord en caso de que no tengas tu cuenta ya asociada a discord. 
+
+``/perfil``: Ruta final, donde recibiras la información de tus servidores e informacion tuya asociada a tu cuenta de discord. 
+
+``/home``: Reside un apartado que te redireccionara a ``login``
+
+
+
+
 
