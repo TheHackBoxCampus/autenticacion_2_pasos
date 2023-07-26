@@ -1,0 +1,31 @@
+{
+  "name": "autenticacion_2_pasos",
+  "version": "1.0.0",
+  "description": "La autenticación de múltiples factores, más comúnmente conocida por sus siglas en inglés MFA, es un método de control de acceso informático en el que a un usuario se le concede acceso al sistema solo después de que presente dos o más pruebas diferentes de que es quien dice ser. Estas pruebas pueden ser diversas, como una contraseña, que posea una clave secundaria rotativa, o un certificado digital instalado en el equipo, biometría, entre otros.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon --quiet src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheHackBoxCampus/autenticacion_2_pasos.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TheHackBoxCampus/autenticacion_2_pasos/issues"
+  },
+  "homepage": "https://github.com/TheHackBoxCampus/autenticacion_2_pasos#readme",
+  "dependencies": {
+    "express": "4.18.2",
+    "express-session": "1.17.3",
+    "passport": "0.6.0",
+    "passport-discord": "0.1.4",
+    "passport-oauth": "1.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "3.0.1"
+  }
+}
